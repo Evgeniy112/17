@@ -22,7 +22,6 @@ class BinaryTree:
             self.right_child = new_child
         return self
 
-
     def post_order(self):
         if self.left_child is not None:  # если левый потомок существует
             self.left_child.post_order()  # рекурсивно вызываем функцию
@@ -32,23 +31,31 @@ class BinaryTree:
 
         print(self.value)  # процедура обработки
 
+    def pre_order(self):
+        print(self.value)  # процедура обработки
+        if self.left_child is not None:  # если левый потомок существует
+           self.left_child.pre_order()  # рекурсивно вызываем функцию
+
+        if self.right_child is not None:  # если правый потомок существует
+            self.right_child.pre_order()  # рекурсивно вызываем функцию
+
+    def in_order(self):
+        if self.left_child is not None:  # если левый потомок существует
+            self.left_child.in_order()  # рекурсивно вызываем функцию
+
+        print(self.value)  # процедура обработки
+
+        if self.right_child is not None:  # если правый потомок существует
+            self.right_child.in_order()  # рекурсивно вызываем функцию
 
 # A_node = BinaryTree('A').insert_left('B').insert_right('C')
-node_root = BinaryTree(2).insert_left(7).insert_right(5)
-node_7 = node_root.left_child.insert_left(2).insert_right(6)
-node_6 = node_7.right_child.insert_left(5).insert_right(11)
-node_5 = node_root.right_child.insert_right(9)
-node_9 = node_5.right_child.insert_left(4)
-#
-#
-def pre_order(self):
-    print(self.value)  # процедура обработки
-
-    if self.left_child is not None:  # если левый потомок существует
-        self.left_child.pre_order()  # рекурсивно вызываем функцию
-
-    if self.right_child is not None:  # если правый потомок существует
-        self.right_child.pre_order()  # рекурсивно вызываем функцию
-
-
+node_root = BinaryTree(1).insert_left(2).insert_right(3)
+node_2 = node_root.left_child.insert_left(4).insert_right(5)
+node_5 = node_2.right_child.insert_left(7).insert_right(8)
+node_3 = node_root.right_child.insert_right(6)
+node_6 = node_3.right_child.insert_left(9)
+node_root.pre_order()
+print('--------------')
 node_root.post_order()
+print('--------------')
+node_root.in_order()
