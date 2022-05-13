@@ -107,4 +107,4 @@ def qsort_random(array, left, right):
     if right > i:
         qsort_random(array, i, right)
 
-qsort_random(array)
+qsort_random(array, random.choice(array[idx_left: idx_right]))

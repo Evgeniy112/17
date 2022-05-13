@@ -1,4 +1,5 @@
-L = list(map(int, input('Введите через пробел последовательность чисел от 0 до 99: ').split()))
+array = input('Введите числа через пробел от 0 до 100: ').split()
+L = list(map(int, array))  # преобразовываем последовательность в список
 
 def merge_sort(L):  # "разделяй"
     if len(L) < 2:  # если кусок массива равен 2,
@@ -33,14 +34,13 @@ def merge(left, right):  # "властвуй"
         j += 1
 
     return result
-sort_L = merge_sort(L)
-print('Отсортированный массив:', sort_L)
-print('Количество элементов в  массиве:', len(sort_L))
+print('Отсортированный массив:', merge_sort(L))
+print('Количество элементов в  массиве:', len(merge_sort(L)))
 
-element = int(input('Введите число от 0 до 99: '))
+
 def binary_search(L, element, left, right):
     if left > right:  # если левая граница превысила правую,
-        return f"{element} отсутствует в списке"  # значит элемент отсутствует
+        return False  # значит элемент отсутствует
 
     middle = (right + left) // 2  # находим середину
     if L[middle] == element:  # если элемент в середине,
@@ -51,16 +51,15 @@ def binary_search(L, element, left, right):
     else:  # иначе в правой
         return binary_search(L, element, middle + 1, right)
 
-# запускаем алгоритм на левой и правой границе
-indx_element = binary_search(sort_L, element, 0, len(sort_L))
-if indx_element == f"{element} отсутствует в списке":
-    print(f"{element} отсутствует в списке")
-elif sort_L[indx_element] == sort_L[0]:
-    print(f"Индекс числа {indx_element}")
-    print(f" Число справа = {sort_L[indx_element + 1]}")
-elif sort_L[indx_element] == sort_L[-1]:
-    print(f"Индекс числа {indx_element}")
-    print(f" Число слева = {sort_L[indx_element - 1]}")
-else:
-    print(f"Индекс числа {indx_element}")
-    print(f" Число слева = {sort_L[indx_element - 1]} , число справа = {sort_L[indx_element + 1]} ")
+while True:
+    try:
+        element = int(input('Введите число от 0 до 100: '))
+        if element < 0 or element > 100:
+            raise Exception
+        break
+    except ValueError:
+        print('Нужно ввести число!')
+    except Exception:
+        print('Неправильный диапазон!')
+
+print(binary_search(L, element, 0, len(L)))
