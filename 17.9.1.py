@@ -1,3 +1,5 @@
+import element as element
+
 L = list(map(int, input('Введите через пробел последовательность чисел от 0 до 99: ').split()))
 
 
@@ -44,12 +46,13 @@ element = int(input('Введите число от 0 до 99: '))
 
 
 def binary_search(L, element, left, right):
-    print(left, right)
+    print(left, right) # Это чтобы лучше понимать что происходит. Перед сдачей УДАЛИТЬ!!!!!!!
     if left > right:  # если левая граница превысила правую,
         return f"{element} отсутствует в списке"  # значит элемент отсутствует
 
     if element > right or element < left:
         return f"{element} отсутствует в списке"
+
     middle = (right + left) // 2  # находим середину
     if L[middle] == element:  # если элемент в середине,
         return middle  # возвращаем этот индекс
@@ -69,7 +72,9 @@ if indx_element == f"{element} отсутствует в списке":
     elif element < sort_L[0]:
         print(f"Число справа = {sort_L[0]}")
     else:
-        print(f"Список = {sort_L.append(element)})
+        list_x = sort_L.append(element)) # Добавляем элемент в список
+        sort_x = merge_sort(list_x) # Сортируем полученный список
+        indx_x = binary_search(sort_x, element, sort_x[0], sort_x[-1]) # Выполняем поиск
 
 elif sort_L[indx_element] == sort_L[0]:
     print(f"Индекс числа {indx_element}")
