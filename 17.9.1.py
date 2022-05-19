@@ -1,5 +1,6 @@
 L = list(map(int, input('Введите через пробел последовательность чисел от 0 до 99: ').split()))
 
+
 def merge_sort(L):  # "разделяй"
     if len(L) < 2:  # если кусок массива равен 2,
         return L[:]  # выходим из рекурсии
@@ -33,15 +34,22 @@ def merge(left, right):  # "властвуй"
         j += 1
 
     return result
+
+
 sort_L = merge_sort(L)
 print('Отсортированный массив:', sort_L)
 print('Количество элементов в  массиве:', len(sort_L))
 
 element = int(input('Введите число от 0 до 99: '))
+
+
 def binary_search(L, element, left, right):
+    print(left, right)
     if left > right:  # если левая граница превысила правую,
         return f"{element} отсутствует в списке"  # значит элемент отсутствует
 
+    if element > right or element < left:
+        return f"{element} отсутствует в списке"
     middle = (right + left) // 2  # находим середину
     if L[middle] == element:  # если элемент в середине,
         return middle  # возвращаем этот индекс
@@ -51,10 +59,18 @@ def binary_search(L, element, left, right):
     else:  # иначе в правой
         return binary_search(L, element, middle + 1, right)
 
+
 # запускаем алгоритм на левой и правой границе
-indx_element = binary_search(sort_L, element, 0, len(sort_L))
+indx_element = binary_search(sort_L, element, sort_L[0], sort_L[-1])
 if indx_element == f"{element} отсутствует в списке":
     print(f"{element} отсутствует в списке")
+    if element > sort_L[-1]:
+        print(f"Число слева = {sort_L[-1]}")
+    elif element < sort_L[0]:
+        print(f"Число справа = {sort_L[0]}")
+    else:
+        print(f"Список = {sort_L.append(element)})
+
 elif sort_L[indx_element] == sort_L[0]:
     print(f"Индекс числа {indx_element}")
     print(f" Число справа = {sort_L[indx_element + 1]}")
