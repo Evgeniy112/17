@@ -1,5 +1,3 @@
-import element as element
-
 L = list(map(int, input('Введите через пробел последовательность чисел от 0 до 99: ').split()))
 
 
@@ -72,7 +70,7 @@ if indx_element == f"{element} отсутствует в списке":
     elif element < sort_L[0]:
         print(f"Число справа = {sort_L[0]}")
     else:
-        list_x = sort_L.append(element)) # Добавляем элемент в список
+        list_x = sort_L.append(element) # Добавляем элемент в список
         sort_x = merge_sort(list_x) # Сортируем полученный список
         indx_x = binary_search(sort_x, element, sort_x[0], sort_x[-1]) # Выполняем поиск
 
