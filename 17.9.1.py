@@ -1,4 +1,14 @@
 L = list(map(int, input('Введите через пробел последовательность чисел от 0 до 99: ').split()))
+while True:
+    try:
+        element = int(input('Введите число от 0 до 100: '))
+        if element < 0 or element > 100:
+            raise Exception
+        break
+    except ValueError:
+        print('Нужно ввести число!')
+    except Exception:
+        print('Неправильный диапазон!')
 
 
 def merge_sort(L):  # "разделяй"
@@ -40,15 +50,12 @@ sort_L = merge_sort(L)
 print('Отсортированный массив:', sort_L)
 print('Количество элементов в  массиве:', len(sort_L))
 
-element = int(input('Введите число от 0 до 99: '))
-
 
 def binary_search(L, element, left, right):
-    print(left, right) # Это чтобы лучше понимать что происходит. Перед сдачей УДАЛИТЬ!!!!!!!
     if left > right:  # если левая граница превысила правую,
         return f"{element} отсутствует в списке"  # значит элемент отсутствует
 
-    if element > right or element < left:
+    if left > element > right:
         return f"{element} отсутствует в списке"
 
     middle = (right + left) // 2  # находим середину
@@ -62,17 +69,18 @@ def binary_search(L, element, left, right):
 
 
 # запускаем алгоритм на левой и правой границе
-indx_element = binary_search(sort_L, element, sort_L[0], sort_L[-1])
+indx_element = binary_search(sort_L, element, 0, len(L)-1)
 if indx_element == f"{element} отсутствует в списке":
     print(f"{element} отсутствует в списке")
-    if element > sort_L[-1]:
-        print(f"Число слева = {sort_L[-1]}")
-    elif element < sort_L[0]:
-        print(f"Число справа = {sort_L[0]}")
+    sort_L.append(element) # Добавляем элемент в список
+    sort_x = merge_sort(sort_L) # Сортируем полученный список
+    indx_x = binary_search(sort_x, element, 0, len(L)-1) # Выполняем поиск
+    if sort_x[indx_x] == sort_x[0]:
+        print(f" Ближайшее число справа = {sort_x[indx_x + 1]}")
+    elif sort_x[indx_x] == sort_x[-1]:
+        print(f" Ближайшее число слева = {sort_x[indx_x - 1]}")
     else:
-        list_x = sort_L.append(element) # Добавляем элемент в список
-        sort_x = merge_sort(list_x) # Сортируем полученный список
-        indx_x = binary_search(sort_x, element, sort_x[0], sort_x[-1]) # Выполняем поиск
+        print(f"Ближайшее число слева = {sort_x[indx_x - 1]} , Ближайшее число справа = {sort_x[indx_x + 1]} ")
 
 elif sort_L[indx_element] == sort_L[0]:
     print(f"Индекс числа {indx_element}")
